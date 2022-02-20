@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col">
+    <h1>Sword forms</h1>
+
+    <p class="lead"><%= link_to "New sword form", new_sword_form_path, id: 'add-sword-form' %></p>
+  </div>
+</div>
+
+
+<div class="row">
+  <table class="col table">
+    <thead>
+      <tr>
+        <th>Form</th>
+        <th>Description</th>
+        <th>Tags</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @sword_forms.each do |sword_form| %>
+        <tr>
+          <td><%= sword_form.name %></td>
+          <td><%= sword_form.description %></td>
+          <td>Tags</td>
+          <td><%= link_to 'Show', sword_form %></td>
+          <td><%= link_to 'Edit', edit_sword_form_path(sword_form) %></td>
+          <td><%= link_to 'Destroy', sword_form, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @sword_form.name %></h1>
+
+<p>
+  <%= @sword_form.description %>
+</p>
+
+<p>
+  <%= link_to 'Edit', edit_sword_form_path(@sword_form) %> |
+  <%= link_to 'Back', sword_forms_path %>
+</p>

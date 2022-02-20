@@ -1,18 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>RpgSwordForms</title>
+    <title>RPG Sword Forms</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag 'application' %>
+    <%= favicon_link_tag asset_path 'favicon-32x32.png' %>
+    <%= javascript_include_tag 'application' %>
   </head>
 
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+  <body class="container">
+    <%- if notice || alert -%>
+    <div class="row">
+      <div class="col">
+        <%- if notice -%>
+        <p class="alert alert-info"><%= notice %></p>
+        <%- end -%>
+        <%- if alert -%>
+        <p class="alert alert-warning"><%= alert %></p>
+        <%- end -%>
+      </div>
+    </div>
+    <%- end -%>
 
     <%= yield %>
   </body>

@@ -1,0 +1,5 @@
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+// https://github.com/twbs/bootstrap-rubygem
+@import "_bootstrap-variables";
+@import "bootstrap";
+@import "forms"

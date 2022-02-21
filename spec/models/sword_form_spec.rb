@@ -9,6 +9,14 @@ RSpec.describe SwordForm, type: :model do
     expect(sf).to_not be_valid
   end
 
+  it 'must have a unique name' do
+    sf = create(:sword_form, name: 'Form 1')
+    expect(sf).to be_valid
+
+    sf2 = build(:sword_form, name: 'Form 1')
+    expect(sf2).to_not be_valid
+  end
+
   it 'must have a description' do
     sf = build(:sword_form, description: 'This is a description')
     expect(sf).to be_valid

@@ -1,21 +1,37 @@
 require 'rails_helper'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe 'SwordForms', type: :request do
-  it 'returns a successful response for the index page' do
-    get sword_forms_path
-    expect(response).to be_successful
+  describe 'GET /index' do
+    it 'returns a successful response' do
+      get sword_forms_path
+      expect(response).to be_successful
+    end
   end
 
-  it 'returns a succesful response for the new game page' do
-    get new_sword_form_path
-    expect(response).to be_successful
+  describe 'GET /show' do
+    it 'returns a succesful response for the show sword form page' do
+      form = create(:sword_form)
+
+      get sword_forms_path(form)
+      expect(response).to be_successful
+    end
   end
 
-  it 'returns a succesful response for the edit game page' do
-    form = build(:sword_form)
-    form.save!
+  describe 'GET /new' do
+    it 'returns a succesful response' do
+      get new_sword_form_path
+      expect(response).to be_successful
+    end
+  end
 
-    get edit_sword_form_path(form.id)
-    expect(response).to be_successful
+  describe 'GET /edit' do
+    it 'returns a succesful response' do
+      form = create(:sword_form)
+
+      get edit_sword_form_path(form)
+      expect(response).to be_successful
+    end
   end
 end
+# rubocop:enable Metrics/BlockLength

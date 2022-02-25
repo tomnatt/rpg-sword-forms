@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :sword_forms
+  devise_for :users
+  scope '/admin' do
+    resources :users
+  end
 
-  root 'sword_forms#index'
+  root to: 'sword_forms#index'
+  resources :sword_forms
 end

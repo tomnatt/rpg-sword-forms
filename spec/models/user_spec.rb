@@ -29,7 +29,7 @@ RSpec.describe User, type: :model do
     user = create(:user, email: 'bar@example.com')
     expect(user).to be_valid
 
-    user = build(:user, email: 'bar@example.com')
-    expect(user).to_not be_valid
+    user2 = build(:user, email: 'bar@example.com')
+    expect(user2).to_not be_valid
   end
 end

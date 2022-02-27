@@ -1,0 +1,43 @@
+<%= form_with(model: user, local: true) do |form| %>
+  <% if user.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2 class="alert-heading"><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset class="form-group row">
+    <legend>New person here</legend>
+
+    <div class="col">
+      <%= form.label :name, 'Name' %>
+      <%= form.text_field :name, id: :user_name, class: 'form-control', required: true %>
+      <small class="form-text text-muted">User's name</small>
+    </div>
+
+    <div class="col">
+      <%= form.label :email %>
+      <%= form.text_field :email, id: :user_email, class: 'form-control', required: true %>
+      <small class="form-text text-muted">User's email address</small>
+    </div>
+
+    <%- if params[:action] == 'new' %>
+    <div class="col">
+      <%= form.label :password %>
+      <%= form.password_field :password, id: :user_password, class: 'form-control', required: true %>
+      <small class="form-text text-muted">User's password</small>
+    </div>
+    <%- end %>
+
+    <div class="actions p-3">
+      <div class="col">
+        <%= form.submit 'Arise, person', class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </fieldset>
+<% end %>

@@ -10,6 +10,25 @@ RSpec.describe 'Accessing the sword forms pages', type: :feature do
     visit sword_forms_path
 
     expect(page).to have_content 'Sword forms'
+    expect(page).to_not have_link('New sword form', href: new_sword_form_path)
+
+    # Check the page lists all the forms
+    expect(page).to have_content 'Form 1'
+    expect(page).to have_content 'Form 2'
+    expect(page).to have_content 'Form 3'
+  end
+
+  scenario 'seeing the link to create a new form when authenicated on the index page' do
+    user = create(:user)
+    sign_in user
+
+    create(:sword_form, name: 'Form 1')
+    create(:sword_form, name: 'Form 2')
+    create(:sword_form, name: 'Form 3')
+
+    visit sword_forms_path
+
+    expect(page).to have_content 'Sword forms'
     expect(page).to have_link('New sword form', href: new_sword_form_path)
 
     # Check the page lists all the forms

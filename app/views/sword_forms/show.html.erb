@@ -3,6 +3,8 @@
 <p><%= @sword_form.description %></p>
 
 <p>
-  <%= link_to 'Edit', edit_sword_form_path(@sword_form) %> |
+  <%- if signed_in? -%>
+    <%= link_to 'Edit', edit_sword_form_path(@sword_form) %> |
+  <%-end -%>
   <%= link_to 'Back', sword_forms_path %>
 </p>

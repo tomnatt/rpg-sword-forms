@@ -1,6 +1,8 @@
 <h1 class="display-5">Sword forms</h1>
 
-<p class="lead"><%= link_to "New sword form", new_sword_form_path, id: 'add-sword-form' %></p>
+<%- if signed_in? -%>
+  <p class="lead"><%= link_to "New sword form", new_sword_form_path, id: 'add-sword-form' %></p>
+<%-end -%>
 
 <table class="table">
   <thead>
@@ -19,8 +21,16 @@
         <td><%= sword_form.description %></td>
         <td>Tags</td>
         <td><%= link_to 'Show', sword_form %></td>
-        <td><%= link_to 'Edit', edit_sword_form_path(sword_form) %></td>
-        <td><%= link_to 'Destroy', sword_form, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%- if signed_in? -%>
+            <%= link_to 'Edit', edit_sword_form_path(sword_form) %>
+          <%-end -%>
+        </td>
+        <td>
+          <%- if signed_in? -%>
+            <%= link_to 'Destroy', sword_form, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%-end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>

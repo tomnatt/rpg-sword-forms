@@ -14,3 +14,4 @@ bundle exec rails s
 Tests:
 
 `bundle exec rspec`
+`bundle exec rubocop`

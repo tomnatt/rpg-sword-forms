@@ -15,3 +15,5 @@ Tests:
 
 `bundle exec rspec`
 `bundle exec rubocop`
+
+Configured for a postgres database (see `config/database.yml`).

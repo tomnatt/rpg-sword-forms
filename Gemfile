@@ -84,5 +84,8 @@ gem 'bootstrap', '~> 5'
 gem 'jquery-rails'
 gem 'mini_racer'
 
+# JS compression
+gem 'terser'
+
 # Authentication
 gem 'devise'

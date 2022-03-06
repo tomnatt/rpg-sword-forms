@@ -2,7 +2,7 @@ require 'rails_helper'
 
 # rubocop:disable Metrics/BlockLength
 RSpec.describe 'Accessing the sword forms pages', type: :feature do
-  scenario 'seeing the list of games on the index page' do
+  scenario 'seeing the list of forms on the index page' do
     create(:sword_form, name: 'Form 1')
     create(:sword_form, name: 'Form 2')
     create(:sword_form, name: 'Form 3')

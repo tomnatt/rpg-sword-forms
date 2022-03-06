@@ -1,0 +1,23 @@
+<%= form_with(model: tag) do |form| %>
+  <% if tag.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <h2><%= pluralize(tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
+
+      <ul>
+        <% tag.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'form-control' %>
+    <small class="form-text text-muted">The name of the tag</small>
+  </div>
+
+  <div class="actions mb-3">
+    <%= form.submit 'Save my tag', class: 'btn btn-primary' %>
+  </div>
+<% end %>

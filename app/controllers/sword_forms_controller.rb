@@ -1,6 +1,7 @@
 class SwordFormsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_sword_form, only: [:show, :edit, :update, :destroy]
+  before_action :set_tags, only: [:new, :edit, :create, :update]
 
   # GET /sword_forms or /sword_forms.json
   def index
@@ -63,8 +64,12 @@ class SwordFormsController < ApplicationController
     @sword_form = SwordForm.find(params[:id])
   end
 
+  def set_tags
+    @tags = Tag.all
+  end
+
   # Only allow a list of trusted parameters through.
   def sword_form_params
-    params.require(:sword_form).permit(:name, :description)
+    params.require(:sword_form).permit(:name, :description, tag_ids: [])
   end
 end

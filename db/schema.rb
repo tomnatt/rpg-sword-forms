@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_06_163802) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_13_135601) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "form_tags", force: :cascade do |t|
+    t.bigint "sword_form_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sword_form_id", "tag_id"], name: "index_form_tags_on_sword_form_id_and_tag_id", unique: true
+    t.index ["sword_form_id"], name: "index_form_tags_on_sword_form_id"
+    t.index ["tag_id", "sword_form_id"], name: "index_form_tags_on_tag_id_and_sword_form_id", unique: true
+    t.index ["tag_id"], name: "index_form_tags_on_tag_id"
+  end
 
   create_table "sword_forms", force: :cascade do |t|
     t.string "name"
@@ -48,4 +59,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_06_163802) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "form_tags", "sword_forms"
+  add_foreign_key "form_tags", "tags"
 end

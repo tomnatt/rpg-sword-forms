@@ -35,7 +35,7 @@ RSpec.describe SwordForm, type: :model do
     # Pull back from db to check saving
     sf = SwordForm.find_by(name: 'Form')
     expect(sf).to be_valid
-    expect(sf.tags.count).to be 1
+    expect(sf.tags.count).to eq 1
 
     # Add another tag
     sf.tags << tag2
@@ -43,7 +43,7 @@ RSpec.describe SwordForm, type: :model do
     # Pull back from db to check saving
     sf = SwordForm.find_by(name: 'Form')
     expect(sf).to be_valid
-    expect(sf.tags.count).to be 2
+    expect(sf.tags.count).to eq 2
   end
 
   it 'must not have the same tag twice' do
@@ -54,7 +54,7 @@ RSpec.describe SwordForm, type: :model do
     # Pull back from db to check saving
     sf = SwordForm.find_by(name: 'Form')
     expect(sf).to be_valid
-    expect(sf.tags.count).to be 1
+    expect(sf.tags.count).to eq 1
 
     # Adding the tag again will raise an error
     expect { sf.tags << tag1 }.to raise_error(ActiveRecord::RecordInvalid)
@@ -70,8 +70,8 @@ RSpec.describe SwordForm, type: :model do
     tag = Tag.find_by(name: 'Tag')
 
     # check associations both ways
-    expect(sf.tags.count).to be 1
-    expect(tag.sword_forms.count).to be 1
+    expect(sf.tags.count).to eq 1
+    expect(tag.sword_forms.count).to eq 1
   end
 
   it 'can be deleted safely' do
@@ -80,18 +80,18 @@ RSpec.describe SwordForm, type: :model do
     tag = create(:tag, name: 'Survive')
     sf.tags << tag
 
-    expect(SwordForm.all.count).to be 1
-    expect(FormTag.all.count).to be 1
-    expect(Tag.all.count).to be 1
+    expect(SwordForm.all.count).to eq 1
+    expect(FormTag.all.count).to eq 1
+    expect(Tag.all.count).to eq 1
 
     sf.destroy!
 
-    expect(SwordForm.all.count).to be 0
-    expect(FormTag.all.count).to be 0
-    expect(Tag.all.count).to be 1
+    expect(SwordForm.all.count).to eq 0
+    expect(FormTag.all.count).to eq 0
+    expect(Tag.all.count).to eq 1
 
     tag = Tag.find_by(name: 'Survive')
-    expect(tag.sword_forms.count).to be 0
+    expect(tag.sword_forms.count).to eq 0
   end
 end
 # rubocop:enable Metrics/BlockLength

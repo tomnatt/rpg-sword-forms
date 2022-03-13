@@ -27,12 +27,12 @@ RSpec.describe Tag, type: :model do
     # Pull back out the database to check saving
     tag = Tag.find_by(name: 'Tag')
     expect(tag).to be_valid
-    expect(tag.sword_forms.count).to be 1
+    expect(tag.sword_forms.count).to eq 1
 
     tag.sword_forms << sf2
     tag = Tag.find_by(name: 'Tag')
     expect(tag).to be_valid
-    expect(tag.sword_forms.count).to be 2
+    expect(tag.sword_forms.count).to eq 2
   end
 
   it 'must not have the same sword form twice' do
@@ -43,7 +43,7 @@ RSpec.describe Tag, type: :model do
     # Pull back out the database to check saving
     tag = Tag.find_by(name: 'Tag')
     expect(tag).to be_valid
-    expect(tag.sword_forms.count).to be 1
+    expect(tag.sword_forms.count).to eq 1
 
     # Adding the form again will raise an error
     expect { tag.sword_forms << sf1 }.to raise_error(ActiveRecord::RecordInvalid)
@@ -59,8 +59,8 @@ RSpec.describe Tag, type: :model do
     sf = SwordForm.find_by(name: 'Form')
 
     # check associations both ways
-    expect(tag.sword_forms.count).to be 1
-    expect(sf.tags.count).to be 1
+    expect(tag.sword_forms.count).to eq 1
+    expect(sf.tags.count).to eq 1
   end
 
   it 'can be deleted safely' do
@@ -69,18 +69,18 @@ RSpec.describe Tag, type: :model do
     sf = create(:sword_form, name: 'Survive')
     tag.sword_forms << sf
 
-    expect(Tag.all.count).to be 1
-    expect(FormTag.all.count).to be 1
-    expect(SwordForm.all.count).to be 1
+    expect(Tag.all.count).to eq 1
+    expect(FormTag.all.count).to eq 1
+    expect(SwordForm.all.count).to eq 1
 
     tag.destroy!
 
-    expect(Tag.all.count).to be 0
-    expect(FormTag.all.count).to be 0
-    expect(SwordForm.all.count).to be 1
+    expect(Tag.all.count).to eq 0
+    expect(FormTag.all.count).to eq 0
+    expect(SwordForm.all.count).to eq 1
 
     sf = SwordForm.find_by(name: 'Survive')
-    expect(sf.tags.count).to be 0
+    expect(sf.tags.count).to eq 0
   end
 end
 # rubocop:enable Metrics/BlockLength

@@ -19,7 +19,7 @@
       <tr>
         <td><%= sword_form.name %></td>
         <td><%= sword_form.description %></td>
-        <td>Tags</td>
+        <td><%= sword_form.tags.map { |t| t.name }.join(', ') %></td>
         <td><%= link_to 'Show', sword_form %></td>
         <td>
           <%- if signed_in? -%>

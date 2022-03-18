@@ -94,5 +94,19 @@ RSpec.describe 'Accessing the tag pages', type: :feature do
     expect(tag).to_not be nil
     expect(tag.sword_forms.count).to eq 0
   end
+
+  scenario 'deleting a tag' do
+    user = create(:user)
+    tag = create(:tag, name: 'Delete')
+
+    # From the home page, find the only 'Destroy' link and click it
+    sign_in user
+    visit tags_path
+    click_link 'Destroy'
+
+    # Check it's gone in the database
+    tag2 = Tag.find_by(name: tag.name)
+    expect(tag2).to be nil
+  end
 end
 # rubocop:enable Metrics/BlockLength

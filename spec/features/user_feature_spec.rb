@@ -78,5 +78,21 @@ RSpec.describe 'Accessing the user admin pages', type: :feature do
     expect(user).to_not be nil
     expect(user.email).to eq user_email
   end
+
+  scenario 'deleting a user' do
+    u = create(:user, name: 'Delete', email: 'delete@example.com')
+
+    # From the user listing, find the correct 'Destroy' link and click it
+    visit users_path
+
+    # Select the <td> with the user name, go four cells right and click the (Destroy) link
+    xpath = ".//td[text() [normalize-space() = '#{u.name}'] ]/following-sibling::td[4]/a[text() = 'Destroy']"
+    # [contains(text(), 'Destroy')]"
+    find(:xpath, xpath).click
+
+    # Check it's gone in the database
+    u2 = User.find_by(name: u.name)
+    expect(u2).to be nil
+  end
 end
 # rubocop:enable Metrics/BlockLength

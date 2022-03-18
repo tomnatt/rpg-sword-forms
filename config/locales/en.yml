@@ -30,4 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  sword_forms:
+    create_success: 'Sword form was successfully created.'
+    update_success: 'Sword form was successfully updated.'
+    destroy_success: 'Sword form was successfully destroyed.'

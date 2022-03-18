@@ -25,7 +25,7 @@ class SwordFormsController < ApplicationController
 
     respond_to do |format|
       if @sword_form.save
-        format.html { redirect_to sword_form_url(@sword_form), notice: 'Sword form was successfully created.' }
+        format.html { redirect_to sword_form_url(@sword_form), notice: I18n.t('sword_forms.create_success') }
         format.json { render :show, status: :created, location: @sword_form }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class SwordFormsController < ApplicationController
   def update
     respond_to do |format|
       if @sword_form.update(sword_form_params)
-        format.html { redirect_to sword_form_url(@sword_form), notice: 'Sword form was successfully updated.' }
+        format.html { redirect_to sword_form_url(@sword_form), notice: I18n.t('sword_forms.update_success') }
         format.json { render :show, status: :ok, location: @sword_form }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class SwordFormsController < ApplicationController
     @sword_form.destroy
 
     respond_to do |format|
-      format.html { redirect_to sword_forms_url, notice: 'Sword form was successfully destroyed.' }
+      format.html { redirect_to sword_forms_url, notice: I18n.t('sword_forms.destroy_success') }
       format.json { head :no_content }
     end
   end

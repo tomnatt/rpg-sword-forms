@@ -146,5 +146,19 @@ RSpec.describe 'Accessing the sword forms pages', type: :feature do
     expect(sf.tags.count).to eq 1
     expect(sf.tags.first.name).to eq tag.name
   end
+
+  scenario 'deleting a sword form' do
+    user = create(:user)
+    sf = create(:sword_form, name: 'Delete', description: 'Only form')
+
+    # From the home page, find the only 'Destroy' link and click it
+    sign_in user
+    visit sword_forms_path
+    click_link 'Destroy'
+
+    # Check it's gone in the database
+    sf2 = SwordForm.find_by(name: sf.name)
+    expect(sf2).to be nil
+  end
 end
 # rubocop:enable Metrics/BlockLength

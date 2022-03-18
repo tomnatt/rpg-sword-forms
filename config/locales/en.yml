@@ -34,3 +34,11 @@ en:
     create_success: 'Sword form was successfully created.'
     update_success: 'Sword form was successfully updated.'
     destroy_success: 'Sword form was successfully destroyed.'
+  tags:
+    create_success: 'Tag was successfully created.'
+    update_success: 'Tag was successfully updated.'
+    destroy_success: 'Tag was successfully destroyed.'
+  users:
+    create_success: 'User was successfully created.'
+    update_success: 'User was successfully updated.'
+    destroy_success: 'User was successfully destroyed.'

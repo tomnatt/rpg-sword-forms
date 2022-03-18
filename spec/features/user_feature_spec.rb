@@ -30,6 +30,26 @@ RSpec.describe 'Accessing the user admin pages', type: :feature do
     expect(page).to have_field 'Name', type: 'text'
     expect(page).to have_field 'Email', type: 'text'
     expect(page).to have_field 'Password', type: 'password'
+    expect(page).to have_button 'Arise, person'
+
+    # Fields for the new User
+    user_name = 'New User'
+    user_email = 'example@example.com'
+    user_password = 'password1'
+
+    # Fill in the fields and save
+    fill_in 'Name', with: user_name
+    fill_in 'Email', with: user_email
+    fill_in 'Password', with: user_password
+    click_button 'Arise, person'
+
+    # Page should contain success message
+    expect(page).to have_content(I18n.t('users.create_success'))
+
+    # Should be saved, so pull from database and check
+    user = User.find_by(name: user_name)
+    expect(user).to_not be nil
+    expect(user.email).to eq user_email
   end
 
   scenario 'editing a user' do
@@ -39,6 +59,24 @@ RSpec.describe 'Accessing the user admin pages', type: :feature do
     expect(page).to have_field 'Name', type: 'text', with: user.name
     expect(page).to have_field 'Email', type: 'text', with: user.email
     expect(page).to_not have_field 'Password', type: 'password'
+    expect(page).to have_button 'Arise, person'
+
+    # Fields for the edited User
+    user_name = 'Edited'
+    user_email = 'user2@example.com'
+
+    # Fill in the fields and save
+    fill_in 'Name', with: user_name
+    fill_in 'Email', with: user_email
+    click_button 'Arise, person'
+
+    # Page should contain success message
+    expect(page).to have_content(I18n.t('users.update_success'))
+
+    # Should be saved, so pull from database and check
+    user = User.find_by(name: user_name)
+    expect(user).to_not be nil
+    expect(user.email).to eq user_email
   end
 end
 # rubocop:enable Metrics/BlockLength

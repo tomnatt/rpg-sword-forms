@@ -103,6 +103,9 @@ RSpec.describe 'Accessing the sword forms pages', type: :feature do
     check tag2.name
     click_button 'Save my form'
 
+    # Page should contain success message
+    expect(page).to have_content(I18n.t('sword_forms.update_success'))
+
     # Should be saved, so pull from database and check
     sf = SwordForm.find_by(name: form_name)
     expect(sf).to_not be nil
@@ -132,6 +135,9 @@ RSpec.describe 'Accessing the sword forms pages', type: :feature do
     fill_in 'Description', with: form_description
     check tag.name
     click_button 'Save my form'
+
+    # Page should contain success message
+    expect(page).to have_content(I18n.t('sword_forms.create_success'))
 
     # Should be saved, so pull from database and check
     sf = SwordForm.find_by(name: form_name)

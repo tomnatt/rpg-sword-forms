@@ -54,6 +54,21 @@ RSpec.describe 'Accessing the tag pages', type: :feature do
 
     expect(page).to have_field 'Name', type: 'text', with: 'Stabbing'
     expect(page).to have_button 'Save my tag'
+
+    # Fields for the edited Tag
+    tag_name = 'Edited'
+
+    # Fill in the fields and save
+    fill_in 'Name', with: tag_name
+    click_button 'Save my tag'
+
+    # Page should contain success message
+    expect(page).to have_content(I18n.t('tags.update_success'))
+
+    # Should be saved, so pull from database and check
+    tag = Tag.find_by(name: tag_name)
+    expect(tag).to_not be nil
+    expect(tag.sword_forms.count).to eq 0
   end
 
   scenario 'adding one of the new tags' do
@@ -63,6 +78,21 @@ RSpec.describe 'Accessing the tag pages', type: :feature do
 
     expect(page).to have_field 'Name', type: 'text'
     expect(page).to have_button 'Save my tag'
+
+    # Fields for the new Tag
+    tag_name = 'New Tag'
+
+    # Fill in the fields and save
+    fill_in 'Name', with: tag_name
+    click_button 'Save my tag'
+
+    # Page should contain success message
+    expect(page).to have_content(I18n.t('tags.create_success'))
+
+    # Should be saved, so pull from database and check
+    tag = Tag.find_by(name: tag_name)
+    expect(tag).to_not be nil
+    expect(tag.sword_forms.count).to eq 0
   end
 end
 # rubocop:enable Metrics/BlockLength

@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   end
 
   root to: 'sword_forms#index'
-  resources :sword_forms
+  resources :sword_forms, :tags
 end

@@ -7,8 +7,8 @@ RSpec.describe 'Unauthenticated accessing the sword form admin pages', type: :fe
   end
 
   scenario 'edit sword form page should require authentication' do
-    user = create(:user)
-    visit edit_user_path(user)
+    form = create(:sword_form)
+    visit edit_sword_form_path(form)
     expect(page).to have_content 'You need to sign in'
   end
 end

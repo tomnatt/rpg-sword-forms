@@ -1,6 +1,13 @@
 <h1 class="display-5"><%= @sword_form.name %></h1>
 
 <p><%= @sword_form.description %></p>
+<%- if @sword_form.tags.count > 0 %>
+  <ul>
+    <%- @sword_form.tags.each do |tag| %>
+      <li><%= tag.name %>
+    <%- end %>
+  </ul>
+<%- end %>
 
 <p>
   <%- if signed_in? -%>

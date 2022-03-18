@@ -23,6 +23,18 @@
     <small class="form-text text-muted">The description of the form</small>
   </div>
 
+  <div class="mb-3">
+    <h3>Tags</h3>
+    <ul>
+    <%= form.collection_check_boxes(:tag_ids, @tags, :id, :name) do |cb| %>
+      <li>
+        <%= cb.check_box %>
+        <%= cb.label %>
+      </li>
+    <%- end %>
+    </ul>
+  </div>
+
   <div class="actions mb-3">
     <%= form.submit 'Save my form', class: 'btn btn-primary' %>
   </div>

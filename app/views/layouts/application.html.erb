@@ -6,9 +6,9 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application' %>
+    <%= stylesheet_link_tag "application", media: :all, data: { turbo_track: "reload" } %>
+    <%= javascript_include_tag "application", data: { turbo_track: "reload" } %>
     <%= favicon_link_tag asset_path 'favicon-32x32.png' %>
-    <%= javascript_include_tag 'application' %>
   </head>
 
   <body class="container">

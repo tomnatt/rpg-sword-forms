@@ -89,3 +89,6 @@ gem 'terser'
 
 # Authentication
 gem 'devise'
+
+# Reading the seed data from a Google Sheet
+gem 'google_drive'

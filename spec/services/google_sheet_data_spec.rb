@@ -42,5 +42,7 @@ RSpec.describe GoogleSheetData do
   end
 
   it 'successfully creates a Tagged Form'
+  it 'successfully caches the Tags'
+  it 'can find a Tag in the cache'
 end
 # rubocop:enable Metrics/BlockLength

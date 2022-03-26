@@ -16,6 +16,7 @@ RSpec.describe 'Accessing the sword forms pages', type: :feature do
 
     expect(page).to have_content 'Sword forms'
     expect(page).to_not have_link('New sword form', href: new_sword_form_path)
+    expect(page).to have_link 'Tags', href: tags_path
 
     # Check the page lists all the forms
     expect(page).to have_content form1.name
@@ -45,6 +46,7 @@ RSpec.describe 'Accessing the sword forms pages', type: :feature do
 
     expect(page).to have_content 'Sword forms'
     expect(page).to have_link('New sword form', href: new_sword_form_path)
+    expect(page).to have_link 'Tags', href: tags_path
 
     # Check the page lists all the forms
     expect(page).to have_content 'Form 1'

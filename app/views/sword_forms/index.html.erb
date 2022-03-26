@@ -1,8 +1,11 @@
 <h1 class="display-5">Sword forms</h1>
 
+<p class="lead">
 <%- if signed_in? -%>
-  <p class="lead"><%= link_to "New sword form", new_sword_form_path, id: 'add-sword-form' %></p>
+  <%= link_to "New sword form", new_sword_form_path, id: 'add-sword-form' %> |
 <%-end -%>
+<%= link_to 'Tags', tags_path %>
+</p>
 
 <table class="table">
   <thead>

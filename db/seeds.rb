@@ -10,4 +10,4 @@ u.save! if u.valid?
 # Read in data from a Google spreadsheet (if account details and spreadsheet set) and save any that do not conflict
 return unless ENV['SWORD_FORM_SERVICE_ACCOUNT'] && ENV['SWORD_FORM_SPREADSHEET']
 
-gsd = GoogleSheetData.new(ENV['SWORD_FORM_SERVICE_ACCOUNT'], ENV['SWORD_FORM_SPREADSHEET'])
+GoogleSheetData.new(ENV['SWORD_FORM_SERVICE_ACCOUNT'], ENV['SWORD_FORM_SPREADSHEET'])

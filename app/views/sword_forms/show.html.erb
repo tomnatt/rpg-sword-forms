@@ -4,7 +4,7 @@
 <%- if @sword_form.tags.count > 0 %>
   <ul>
     <%- @sword_form.tags.each do |tag| %>
-      <li><%= tag.name %></li>
+      <li><%= link_to tag.name, tag_path(tag) %></li>
     <%- end %>
   </ul>
 <%- end %>

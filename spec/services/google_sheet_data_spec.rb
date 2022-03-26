@@ -86,8 +86,17 @@ RSpec.describe GoogleSheetData do
     @gsd.create_or_fetch_tags(tag_string)
     expect(@gsd.cached_tags.count).to eq 2
     expect(@gsd.cached_tags[0].name).to match(/Defensive|Form/)
-    expect(@gsd.cached_tags[0].name).to match(/Defensive|Form/)
+    expect(@gsd.cached_tags[1].name).to match(/Defensive|Form/)
     expect(Tag.all.count).to eq 2
+
+    # Changing the order should trim properly
+    tag_string = 'Form, Defensive, Guard'
+    @gsd.create_or_fetch_tags(tag_string)
+    expect(@gsd.cached_tags.count).to eq 3
+    expect(@gsd.cached_tags[0].name).to match(/Defensive|Form|Guard/)
+    expect(@gsd.cached_tags[1].name).to match(/Defensive|Form|Guard/)
+    expect(@gsd.cached_tags[2].name).to match(/Defensive|Form|Guard/)
+    expect(Tag.all.count).to eq 3
   end
 
   it 'correctly fetches Tag from cache when present' do

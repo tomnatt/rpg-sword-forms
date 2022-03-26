@@ -29,7 +29,7 @@ class GoogleSheetData
     # tag_string should be a comma separated string, so split and operate
     form_tags = []
     tag_string.split(',').each do |t|
-      t.chomp!
+      t.strip!
       # If new, create and add to cache else collect from cache
       form_tags << (tag_from_cache(t).presence || create_tag(t))
     end

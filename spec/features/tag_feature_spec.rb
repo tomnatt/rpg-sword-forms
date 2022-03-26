@@ -10,7 +10,7 @@ RSpec.describe 'Accessing the tag pages', type: :feature do
     visit tags_path
 
     expect(page).to have_content 'Tags'
-    expect(page).to_not have_link('New tag', href: new_tag_path)
+    expect(page).to_not have_link 'New tag', href: new_tag_path
 
     # Check the page lists all the tags
     expect(page).to have_content 'Tag 1'
@@ -29,7 +29,7 @@ RSpec.describe 'Accessing the tag pages', type: :feature do
     visit tags_path
 
     expect(page).to have_content 'Tags'
-    expect(page).to have_link('New tag', href: new_tag_path)
+    expect(page).to have_link 'New tag', href: new_tag_path
 
     # Check the page lists all the tags
     expect(page).to have_content 'Tag 1'
@@ -37,12 +37,31 @@ RSpec.describe 'Accessing the tag pages', type: :feature do
     expect(page).to have_content 'Tag 3'
   end
 
-  scenario 'viewing a tag' do
+  scenario 'viewing a tag without forms' do
     tag = create(:tag, name: 'Stabbing')
 
     visit tag_path(tag)
 
     expect(page).to have_content 'Stabbing'
+    expect(page).to_not have_selector 'ul'
+  end
+
+  scenario 'viewing a tag with sword forms' do
+    tag = create(:tag, name: 'Stabbing')
+    form1 = create(:sword_form, name: 'Form 1')
+    form1.tags << tag
+    form2 = create(:sword_form, name: 'Form 2')
+    form2.tags << tag
+    form3 = create(:sword_form, name: 'Form 3')
+    form3.tags << tag
+
+    visit tag_path(tag)
+
+    expect(page).to have_content 'Stabbing'
+    expect(page).to have_selector 'ul'
+    expect(page).to have_link 'Form 1', href: sword_form_path(form1)
+    expect(page).to have_link 'Form 2', href: sword_form_path(form2)
+    expect(page).to have_link 'Form 3', href: sword_form_path(form3)
   end
 
   scenario 'editing one of the tags' do

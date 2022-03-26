@@ -1,5 +1,13 @@
 <h1 class="display-5"><%= @tag.name %></h1>
 
+<%- if @tag.sword_forms.count > 0 %>
+  <ul>
+    <%- @tag.sword_forms.each do |sf| %>
+      <li><%= link_to sf.name, sword_form_path(sf) %>
+    <%- end %>
+  </ul>
+<%- end %>
+
 <p>
   <%- if signed_in? -%>
     <%= link_to 'Edit', edit_tag_path(@tag) %> |

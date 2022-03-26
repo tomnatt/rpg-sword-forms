@@ -11,6 +11,7 @@ RSpec.describe 'Accessing the tag pages', type: :feature do
 
     expect(page).to have_content 'Tags'
     expect(page).to_not have_link 'New tag', href: new_tag_path
+    expect(page).to have_link 'Sword forms', href: sword_forms_path
 
     # Check the page lists all the tags
     expect(page).to have_content 'Tag 1'
@@ -30,6 +31,7 @@ RSpec.describe 'Accessing the tag pages', type: :feature do
 
     expect(page).to have_content 'Tags'
     expect(page).to have_link 'New tag', href: new_tag_path
+    expect(page).to have_link 'Sword forms', href: sword_forms_path
 
     # Check the page lists all the tags
     expect(page).to have_content 'Tag 1'

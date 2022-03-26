@@ -73,7 +73,7 @@ RSpec.describe 'Accessing the sword forms pages', type: :feature do
     expect(page).to have_content 'Test sword form 1'
 
     expect(page).to have_selector 'ul'
-    expect(page).to have_content 'Tag 1'
+    expect(page).to have_link 'Tag 1', href: tag_path(tag)
   end
 
   scenario 'editing one of the sword forms' do

@@ -5,7 +5,7 @@ class SwordFormsController < ApplicationController
 
   # GET /sword_forms or /sword_forms.json
   def index
-    @sword_forms = SwordForm.all
+    @sword_forms = SwordForm.all.order(name: :asc)
   end
 
   # GET /sword_forms/1 or /sword_forms/1.json

@@ -65,7 +65,7 @@ class SwordFormsController < ApplicationController
   end
 
   def set_tags
-    @tags = Tag.all
+    @tags = Tag.all.order(name: :asc)
   end
 
   # Only allow a list of trusted parameters through.

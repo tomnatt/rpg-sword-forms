@@ -45,7 +45,7 @@ RSpec.describe 'Accessing the tag pages', type: :feature do
     visit tag_path(tag)
 
     expect(page).to have_content 'Stabbing'
-    expect(page).to_not have_selector 'ul'
+    expect(page).to_not have_selector(:xpath, '//h1/ul')
   end
 
   scenario 'viewing a tag with sword forms' do
@@ -60,10 +60,41 @@ RSpec.describe 'Accessing the tag pages', type: :feature do
     visit tag_path(tag)
 
     expect(page).to have_content 'Stabbing'
-    expect(page).to have_selector 'ul'
     expect(page).to have_link 'Form 1', href: sword_form_path(form1)
+    expect(page).to have_content form1.description
+    expect(page).to have_selector(:xpath, form_tag_selector(form1.name, tag.name))
+
     expect(page).to have_link 'Form 2', href: sword_form_path(form2)
+    expect(page).to have_content form2.description
+    expect(page).to have_selector(:xpath, form_tag_selector(form2.name, tag.name))
+
     expect(page).to have_link 'Form 3', href: sword_form_path(form3)
+    expect(page).to have_content form3.description
+    expect(page).to have_selector(:xpath, form_tag_selector(form3.name, tag.name))
+  end
+
+  scenario 'seeing a tag list on the individual tag page' do
+    tag1 = create(:tag, name: 'Tag 1')
+    tag2 = create(:tag, name: 'Tag 2')
+    tag3 = create(:tag, name: 'Tag 3')
+    form1 = create(:sword_form, name: 'Form 1')
+    form1.tags << tag1
+
+    visit tag_path(tag1)
+
+    expect(page).to have_selector '#tags-sidebar'
+    expect(page).to have_selector(:xpath, ".//div[@id='tags-sidebar']/h2[text() = 'Tags']")
+
+    # Check the sidebar lists all the tags
+    expect(page).to have_link 'Tag 1', href: tag_path(tag1)
+    expect(page).to have_link 'Tag 2', href: tag_path(tag2)
+    expect(page).to have_link 'Tag 3', href: tag_path(tag3)
+  end
+
+  def form_tag_selector(form, tag)
+    # Select the <td> with the form name in an <a>, go to parent,
+    # two cells right and check text in an <a> contains tag name
+    ".//td/a[text() [normalize-space() = '#{form}'] ]/parent::td/following-sibling::td[2]/a[text() = '#{tag}']"
   end
 
   scenario 'editing one of the tags' do

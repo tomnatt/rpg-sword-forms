@@ -1,7 +1,7 @@
 class SwordFormsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_sword_form, only: [:show, :edit, :update, :destroy]
-  before_action :set_tags, only: [:new, :edit, :create, :update]
+  before_action :set_tags, except: [:destroy]
 
   # GET /sword_forms or /sword_forms.json
   def index
@@ -62,10 +62,6 @@ class SwordFormsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_sword_form
     @sword_form = SwordForm.find(params[:id])
-  end
-
-  def set_tags
-    @tags = Tag.all
   end
 
   # Only allow a list of trusted parameters through.

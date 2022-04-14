@@ -1,11 +1,36 @@
 <h1 class="display-5"><%= @tag.name %></h1>
 
 <%- if @tag.sword_forms.count > 0 %>
-  <ul>
-    <%- @tag.sword_forms.each do |sf| %>
-      <li><%= link_to sf.name, sword_form_path(sf) %>
-    <%- end %>
-  </ul>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Form</th>
+        <th>Description</th>
+        <th>Tags</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @tag.sword_forms.each do |sword_form| %>
+        <tr>
+          <td><%= link_to sword_form.name, sword_form %></td>
+          <td><%= sword_form.description %></td>
+          <td><%= safe_join(sword_form.tags.map { |t| link_to(t.name, t) }, ', '.html_safe) %></td>
+          <td>
+            <%- if signed_in? -%>
+              <%= link_to 'Edit', edit_sword_form_path(sword_form) %>
+            <%-end -%>
+          </td>
+          <td>
+            <%- if signed_in? -%>
+              <%= link_to 'Destroy', sword_form, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%-end -%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <%- end %>
 
 <p>
@@ -14,3 +39,5 @@
   <%-end -%>
   <%= link_to 'Back', tags_path %>
 </p>
+
+<%= render 'layouts/tag_list', all_tags: @tags %>

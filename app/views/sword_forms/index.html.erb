@@ -13,17 +13,16 @@
       <th>Form</th>
       <th>Description</th>
       <th>Tags</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @sword_forms.each do |sword_form| %>
       <tr>
-        <td><%= sword_form.name %></td>
+        <td><%= link_to sword_form.name, sword_form %></td>
         <td><%= sword_form.description %></td>
-        <td><%= sword_form.tags.map { |t| t.name }.join(', ') %></td>
-        <td><%= link_to 'Show', sword_form %></td>
+        <td><%= safe_join(sword_form.tags.map { |t| link_to(t.name, t) }, ', '.html_safe) %></td>
         <td>
           <%- if signed_in? -%>
             <%= link_to 'Edit', edit_sword_form_path(sword_form) %>

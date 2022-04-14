@@ -30,8 +30,9 @@ RSpec.describe 'Accessing the sword forms pages', type: :feature do
   end
 
   def form_tag_selector(form, tag)
-    # Select the <td> with the form name, go two cells right and check text contains tag name
-    ".//td[text() [normalize-space() = '#{form}'] ]/following-sibling::td[2][contains(text(), '#{tag}')]"
+    # Select the <td> with the form name in an <a>, go to parent,
+    # two cells right and check text in an <a> contains tag name
+    ".//td/a[text() [normalize-space() = '#{form}'] ]/parent::td/following-sibling::td[2]/a[text() = '#{tag}']"
   end
 
   scenario 'seeing the link to create a new form when authenicated on the index page' do

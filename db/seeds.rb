@@ -8,6 +8,11 @@ u = User.new(email:    admin_email,
 u.save! if u.valid?
 
 # Read in data from a Google spreadsheet (if account details and spreadsheet set) and save any that do not conflict
-return unless ENV['SWORD_FORM_SERVICE_ACCOUNT'] && ENV['SWORD_FORM_SPREADSHEET']
+return unless ENV['SWORD_FORM_SERVICE_ACCOUNT'] || ENV['GOOGLE_APPLICATION_CREDENTIALS']
+return unless ENV['SWORD_FORM_SPREADSHEET']
 
-GoogleSheetData.new(ENV['SWORD_FORM_SERVICE_ACCOUNT'], ENV['SWORD_FORM_SPREADSHEET'])
+if ENV['SWORD_FORM_SERVICE_ACCOUNT']
+  GoogleSheetData.new(ENV['SWORD_FORM_SERVICE_ACCOUNT'], ENV['SWORD_FORM_SPREADSHEET'])
+else
+  GoogleSheetData.new(ENV['GOOGLE_APPLICATION_CREDENTIALS'], ENV['SWORD_FORM_SPREADSHEET'])
+end

@@ -60,10 +60,23 @@ RSpec.describe 'Accessing the tag pages', type: :feature do
     visit tag_path(tag)
 
     expect(page).to have_content 'Stabbing'
-    expect(page).to have_selector 'ul'
     expect(page).to have_link 'Form 1', href: sword_form_path(form1)
+    expect(page).to have_content form1.description
+    expect(page).to have_selector(:xpath, form_tag_selector(form1.name, tag.name))
+
     expect(page).to have_link 'Form 2', href: sword_form_path(form2)
+    expect(page).to have_content form2.description
+    expect(page).to have_selector(:xpath, form_tag_selector(form2.name, tag.name))
+
     expect(page).to have_link 'Form 3', href: sword_form_path(form3)
+    expect(page).to have_content form3.description
+    expect(page).to have_selector(:xpath, form_tag_selector(form3.name, tag.name))
+  end
+
+  def form_tag_selector(form, tag)
+    # Select the <td> with the form name in an <a>, go to parent,
+    # two cells right and check text in an <a> contains tag name
+    ".//td/a[text() [normalize-space() = '#{form}'] ]/parent::td/following-sibling::td[2]/a[text() = '#{tag}']"
   end
 
   scenario 'editing one of the tags' do

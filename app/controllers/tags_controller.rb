@@ -1,11 +1,10 @@
 class TagsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
+  before_action :set_tags, only: [:index, :show]
 
   # GET /tags or /tags.json
-  def index
-    @tags = Tag.all.order(name: :asc)
-  end
+  def index; end
 
   # GET /tags/1 or /tags/1.json
   def show; end

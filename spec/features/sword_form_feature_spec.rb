@@ -35,6 +35,40 @@ RSpec.describe 'Accessing the sword forms pages', type: :feature do
     ".//td/a[text() [normalize-space() = '#{form}'] ]/parent::td/following-sibling::td[2]/a[text() = '#{tag}']"
   end
 
+  scenario 'seeing a tag list on the index page' do
+    create(:sword_form, name: 'Form 1')
+    tag1 = create(:tag, name: 'Tag 1')
+    tag2 = create(:tag, name: 'Tag 2')
+    tag3 = create(:tag, name: 'Tag 3')
+
+    visit sword_forms_path
+
+    expect(page).to have_selector '#tags-sidebar'
+    expect(page).to have_selector(:xpath, ".//div[@id='tags-sidebar']/h2[text() = 'Tags']")
+
+    # Check the sidebar lists all the tags
+    expect(page).to have_link 'Tag 1', href: tag_path(tag1)
+    expect(page).to have_link 'Tag 2', href: tag_path(tag2)
+    expect(page).to have_link 'Tag 3', href: tag_path(tag3)
+  end
+
+  scenario 'seeing a tag list on the individual sword form page' do
+    form1 = create(:sword_form, name: 'Form 1')
+    tag1 = create(:tag, name: 'Tag 1')
+    tag2 = create(:tag, name: 'Tag 2')
+    tag3 = create(:tag, name: 'Tag 3')
+
+    visit sword_form_path(form1)
+
+    expect(page).to have_selector '#tags-sidebar'
+    expect(page).to have_selector(:xpath, ".//div[@id='tags-sidebar']/h2[text() = 'Tags']")
+
+    # Check the sidebar lists all the tags
+    expect(page).to have_link 'Tag 1', href: tag_path(tag1)
+    expect(page).to have_link 'Tag 2', href: tag_path(tag2)
+    expect(page).to have_link 'Tag 3', href: tag_path(tag3)
+  end
+
   scenario 'seeing the link to create a new form when authenicated on the index page' do
     user = create(:user)
     sign_in user
@@ -46,7 +80,7 @@ RSpec.describe 'Accessing the sword forms pages', type: :feature do
     visit sword_forms_path
 
     expect(page).to have_content 'Sword forms'
-    expect(page).to have_link('New sword form', href: new_sword_form_path)
+    expect(page).to have_link 'New sword form', href: new_sword_form_path
     expect(page).to have_link 'Tags', href: tags_path
 
     # Check the page lists all the forms
@@ -62,7 +96,7 @@ RSpec.describe 'Accessing the sword forms pages', type: :feature do
 
     expect(page).to have_content 'Form 1'
     expect(page).to have_content 'Test sword form 1'
-    expect(page).to_not have_selector 'ul'
+    expect(page).to_not have_selector(:xpath, '//h1/ul')
   end
 
   scenario 'viewing a sword form with tags' do
@@ -75,8 +109,8 @@ RSpec.describe 'Accessing the sword forms pages', type: :feature do
     expect(page).to have_content 'Form 1'
     expect(page).to have_content 'Test sword form 1'
 
-    expect(page).to have_selector 'ul'
-    expect(page).to have_link 'Tag 1', href: tag_path(tag)
+    expect(page).to_not have_selector(:xpath, '//h1/ul')
+    expect(page).to have_link('Tag 1', href: tag_path(tag), count: 2)
   end
 
   scenario 'editing one of the sword forms' do

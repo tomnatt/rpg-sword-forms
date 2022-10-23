@@ -73,7 +73,7 @@ group :test do
   gem 'factory_bot_rails'
   gem 'rubocop'
   gem 'rubocop-rails', require: false
-  gem 'rubocop-rspec', require: false
+  # gem 'rubocop-rspec', require: false
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'

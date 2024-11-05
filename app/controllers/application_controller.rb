@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
   private
 
   def set_tags
-    @tags = Tag.all.order(name: :asc)
+    @tags = Tag.order(name: :asc)
   end
 end

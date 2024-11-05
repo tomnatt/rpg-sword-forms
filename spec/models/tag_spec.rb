@@ -69,15 +69,15 @@ RSpec.describe Tag, type: :model do
     sf = create(:sword_form, name: 'Survive')
     tag.sword_forms << sf
 
-    expect(Tag.all.count).to eq 1
-    expect(FormTag.all.count).to eq 1
-    expect(SwordForm.all.count).to eq 1
+    expect(Tag.count).to eq 1
+    expect(FormTag.count).to eq 1
+    expect(SwordForm.count).to eq 1
 
     tag.destroy!
 
-    expect(Tag.all.count).to eq 0
-    expect(FormTag.all.count).to eq 0
-    expect(SwordForm.all.count).to eq 1
+    expect(Tag.count).to eq 0
+    expect(FormTag.count).to eq 0
+    expect(SwordForm.count).to eq 1
 
     sf = SwordForm.find_by(name: 'Survive')
     expect(sf.tags.count).to eq 0

@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
 
     services:
       postgres:
@@ -27,10 +27,10 @@ jobs:
     steps:
 
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Set up Chrome driver
-      uses: nanasess/setup-chromedriver@v1.0.1
+      uses: nanasess/setup-chromedriver@v2
 
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1

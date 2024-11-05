@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 # rubocop:disable Metrics/BlockLength
-RSpec.describe SwordForm, type: :model do
+RSpec.describe SwordForm do
   it 'must have a name' do
     sf = build(:sword_form, name: 'Foo')
     expect(sf).to be_valid
 
     sf = build(:sword_form, name: nil)
-    expect(sf).to_not be_valid
+    expect(sf).not_to be_valid
   end
 
   it 'must have a unique name' do
@@ -15,7 +15,7 @@ RSpec.describe SwordForm, type: :model do
     expect(sf).to be_valid
 
     sf2 = build(:sword_form, name: 'Form 1')
-    expect(sf2).to_not be_valid
+    expect(sf2).not_to be_valid
   end
 
   it 'must have a description' do
@@ -23,7 +23,7 @@ RSpec.describe SwordForm, type: :model do
     expect(sf).to be_valid
 
     sf = build(:sword_form, description: nil)
-    expect(sf).to_not be_valid
+    expect(sf).not_to be_valid
   end
 
   it 'may have some tags' do
@@ -33,7 +33,7 @@ RSpec.describe SwordForm, type: :model do
     sf.tags << tag1
 
     # Pull back from db to check saving
-    sf = SwordForm.find_by(name: 'Form')
+    sf = described_class.find_by(name: 'Form')
     expect(sf).to be_valid
     expect(sf.tags.count).to eq 1
 
@@ -41,7 +41,7 @@ RSpec.describe SwordForm, type: :model do
     sf.tags << tag2
 
     # Pull back from db to check saving
-    sf = SwordForm.find_by(name: 'Form')
+    sf = described_class.find_by(name: 'Form')
     expect(sf).to be_valid
     expect(sf.tags.count).to eq 2
   end
@@ -52,7 +52,7 @@ RSpec.describe SwordForm, type: :model do
     sf.tags << tag1
 
     # Pull back from db to check saving
-    sf = SwordForm.find_by(name: 'Form')
+    sf = described_class.find_by(name: 'Form')
     expect(sf).to be_valid
     expect(sf.tags.count).to eq 1
 
@@ -66,7 +66,7 @@ RSpec.describe SwordForm, type: :model do
     sf.tags << tag
 
     # Get the tag and form fresh from the database
-    sf = SwordForm.find_by(name: 'Form')
+    sf = described_class.find_by(name: 'Form')
     tag = Tag.find_by(name: 'Tag')
 
     # check associations both ways
@@ -80,15 +80,15 @@ RSpec.describe SwordForm, type: :model do
     tag = create(:tag, name: 'Survive')
     sf.tags << tag
 
-    expect(SwordForm.all.count).to eq 1
-    expect(FormTag.all.count).to eq 1
-    expect(Tag.all.count).to eq 1
+    expect(described_class.count).to eq 1
+    expect(FormTag.count).to eq 1
+    expect(Tag.count).to eq 1
 
     sf.destroy!
 
-    expect(SwordForm.all.count).to eq 0
-    expect(FormTag.all.count).to eq 0
-    expect(Tag.all.count).to eq 1
+    expect(described_class.count).to eq 0
+    expect(FormTag.count).to eq 0
+    expect(Tag.count).to eq 1
 
     tag = Tag.find_by(name: 'Survive')
     expect(tag.sword_forms.count).to eq 0

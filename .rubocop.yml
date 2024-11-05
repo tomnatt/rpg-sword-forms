@@ -1,4 +1,9 @@
-require: rubocop-rails
+require:
+  - rubocop-capybara
+  - rubocop-factory_bot
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-rspec_rails
 
 AllCops:
   NewCops: enable
@@ -31,4 +36,10 @@ Rails/FilePath:
   Enabled: false
 
 Rails/RefuteMethods:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Max: 24
+
+RSpec/MultipleExpectations:
   Enabled: false

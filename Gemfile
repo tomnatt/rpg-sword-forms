@@ -72,7 +72,11 @@ group :test do
   gem 'capybara'
   gem 'factory_bot_rails'
   gem 'rubocop'
+  gem 'rubocop-capybara', require: false
+  gem 'rubocop-factory_bot', require: false
   gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
+  gem 'rubocop-rspec_rails', require: false
   # gem 'rubocop-rspec', require: false
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
@@ -92,3 +96,6 @@ gem 'devise'
 
 # Reading the seed data from a Google Sheet
 gem 'google_drive'
+
+# Required as dependencies change
+gem 'mutex_m'

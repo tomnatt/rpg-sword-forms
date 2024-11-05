@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 # rubocop:disable Metrics/BlockLength
-RSpec.describe 'Accessing the user admin pages', type: :feature do
-  before :each do
-    @user = create(:user)
-    sign_in @user
+RSpec.describe 'Accessing the user admin pages' do
+  let(:user) { create(:user) }
+
+  before do
+    sign_in user
   end
 
   scenario 'seeing a list of users on the index page' do
@@ -14,7 +15,7 @@ RSpec.describe 'Accessing the user admin pages', type: :feature do
 
     visit users_path
     expect(page).to have_content('User 1')
-    expect(page).to have_selector('tr.user', count: 4)
+    expect(page).to have_css('tr.user', count: 4)
   end
 
   scenario 'viewing a user' do
@@ -41,14 +42,14 @@ RSpec.describe 'Accessing the user admin pages', type: :feature do
     fill_in 'Name', with: user_name
     fill_in 'Email', with: user_email
     fill_in 'Password', with: user_password
-    click_button 'Arise, person'
+    click_link_or_button 'Arise, person'
 
     # Page should contain success message
     expect(page).to have_content(I18n.t('users.create_success'))
 
     # Should be saved, so pull from database and check
     user = User.find_by(name: user_name)
-    expect(user).to_not be nil
+    expect(user).not_to be_nil
     expect(user.email).to eq user_email
   end
 
@@ -58,7 +59,7 @@ RSpec.describe 'Accessing the user admin pages', type: :feature do
     visit edit_user_path(user)
     expect(page).to have_field 'Name', type: 'text', with: user.name
     expect(page).to have_field 'Email', type: 'text', with: user.email
-    expect(page).to_not have_field 'Password', type: 'password'
+    expect(page).to have_no_field 'Password', type: 'password'
     expect(page).to have_button 'Arise, person'
 
     # Fields for the edited User
@@ -68,14 +69,14 @@ RSpec.describe 'Accessing the user admin pages', type: :feature do
     # Fill in the fields and save
     fill_in 'Name', with: user_name
     fill_in 'Email', with: user_email
-    click_button 'Arise, person'
+    click_link_or_button 'Arise, person'
 
     # Page should contain success message
     expect(page).to have_content(I18n.t('users.update_success'))
 
     # Should be saved, so pull from database and check
     user = User.find_by(name: user_name)
-    expect(user).to_not be nil
+    expect(user).not_to be_nil
     expect(user.email).to eq user_email
   end
 
@@ -92,7 +93,7 @@ RSpec.describe 'Accessing the user admin pages', type: :feature do
 
     # Check it's gone in the database
     u2 = User.find_by(name: u.name)
-    expect(u2).to be nil
+    expect(u2).to be_nil
   end
 end
 # rubocop:enable Metrics/BlockLength

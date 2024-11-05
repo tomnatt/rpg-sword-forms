@@ -92,3 +92,6 @@ gem 'devise'
 
 # Reading the seed data from a Google Sheet
 gem 'google_drive'
+
+# Required as dependencies change
+gem 'mutex_m'

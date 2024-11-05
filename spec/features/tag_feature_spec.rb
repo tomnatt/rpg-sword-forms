@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 # rubocop:disable Metrics/BlockLength
-RSpec.describe 'Accessing the tag pages', type: :feature do
+RSpec.describe 'Accessing the tag pages' do
   scenario 'seeing the list of tags on the index page' do
     create(:tag, name: 'Tag 1')
     create(:tag, name: 'Tag 2')
@@ -10,7 +10,7 @@ RSpec.describe 'Accessing the tag pages', type: :feature do
     visit tags_path
 
     expect(page).to have_content 'Tags'
-    expect(page).to_not have_link 'New tag', href: new_tag_path
+    expect(page).to have_no_link 'New tag', href: new_tag_path
     expect(page).to have_link 'Sword forms', href: sword_forms_path
 
     # Check the page lists all the tags
@@ -45,7 +45,7 @@ RSpec.describe 'Accessing the tag pages', type: :feature do
     visit tag_path(tag)
 
     expect(page).to have_content 'Stabbing'
-    expect(page).to_not have_selector(:xpath, '//h1/ul')
+    expect(page).to have_no_xpath('//h1/ul')
   end
 
   scenario 'viewing a tag with sword forms' do
@@ -62,15 +62,15 @@ RSpec.describe 'Accessing the tag pages', type: :feature do
     expect(page).to have_content 'Stabbing'
     expect(page).to have_link 'Form 1', href: sword_form_path(form1)
     expect(page).to have_content form1.description
-    expect(page).to have_selector(:xpath, form_tag_selector(form1.name, tag.name))
+    expect(page).to have_xpath form_tag_selector(form1.name, tag.name)
 
     expect(page).to have_link 'Form 2', href: sword_form_path(form2)
     expect(page).to have_content form2.description
-    expect(page).to have_selector(:xpath, form_tag_selector(form2.name, tag.name))
+    expect(page).to have_xpath form_tag_selector(form2.name, tag.name)
 
     expect(page).to have_link 'Form 3', href: sword_form_path(form3)
     expect(page).to have_content form3.description
-    expect(page).to have_selector(:xpath, form_tag_selector(form3.name, tag.name))
+    expect(page).to have_xpath form_tag_selector(form3.name, tag.name)
   end
 
   scenario 'seeing a tag list on the individual tag page' do
@@ -82,8 +82,8 @@ RSpec.describe 'Accessing the tag pages', type: :feature do
 
     visit tag_path(tag1)
 
-    expect(page).to have_selector '#tags-sidebar'
-    expect(page).to have_selector(:xpath, ".//div[@id='tags-sidebar']/h2[text() = 'Tags']")
+    expect(page).to have_css '#tags-sidebar'
+    expect(page).to have_xpath ".//div[@id='tags-sidebar']/h2[text() = 'Tags']"
 
     # Check the sidebar lists all the tags
     expect(page).to have_link 'Tag 1', href: tag_path(tag1)
@@ -112,14 +112,14 @@ RSpec.describe 'Accessing the tag pages', type: :feature do
 
     # Fill in the fields and save
     fill_in 'Name', with: tag_name
-    click_button 'Save my tag'
+    click_link_or_button 'Save my tag'
 
     # Page should contain success message
     expect(page).to have_content(I18n.t('tags.update_success'))
 
     # Should be saved, so pull from database and check
     tag = Tag.find_by(name: tag_name)
-    expect(tag).to_not be nil
+    expect(tag).not_to be_nil
     expect(tag.sword_forms.count).to eq 0
   end
 
@@ -136,14 +136,14 @@ RSpec.describe 'Accessing the tag pages', type: :feature do
 
     # Fill in the fields and save
     fill_in 'Name', with: tag_name
-    click_button 'Save my tag'
+    click_link_or_button 'Save my tag'
 
     # Page should contain success message
     expect(page).to have_content(I18n.t('tags.create_success'))
 
     # Should be saved, so pull from database and check
     tag = Tag.find_by(name: tag_name)
-    expect(tag).to_not be nil
+    expect(tag).not_to be_nil
     expect(tag.sword_forms.count).to eq 0
   end
 
@@ -154,11 +154,11 @@ RSpec.describe 'Accessing the tag pages', type: :feature do
     # From the home page, find the only 'Destroy' link and click it
     sign_in user
     visit tags_path
-    click_link 'Destroy'
+    click_link_or_button 'Destroy'
 
     # Check it's gone in the database
     tag2 = Tag.find_by(name: tag.name)
-    expect(tag2).to be nil
+    expect(tag2).to be_nil
   end
 end
 # rubocop:enable Metrics/BlockLength

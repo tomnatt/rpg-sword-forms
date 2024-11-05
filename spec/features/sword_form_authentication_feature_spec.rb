@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Unauthenticated accessing the sword form admin pages', type: :feature do
+RSpec.describe 'Unauthenticated accessing the sword form admin pages' do
   scenario 'add sword form page should require authentication' do
     visit new_sword_form_path
     expect(page).to have_content 'You need to sign in'

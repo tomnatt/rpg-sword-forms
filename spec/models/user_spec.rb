@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe User do
   it 'must have a name' do
     user = build(:user, name: 'Steve')
     expect(user).to be_valid
 
     user = build(:user, name: nil)
-    expect(user).to_not be_valid
+    expect(user).not_to be_valid
   end
 
   it 'must have a unique name' do
@@ -14,7 +14,7 @@ RSpec.describe User, type: :model do
     expect(user).to be_valid
 
     user2 = build(:user, name: 'Steve')
-    expect(user2).to_not be_valid
+    expect(user2).not_to be_valid
   end
 
   it 'must have an email address' do
@@ -22,7 +22,7 @@ RSpec.describe User, type: :model do
     expect(user).to be_valid
 
     user = build(:user, email: nil)
-    expect(user).to_not be_valid
+    expect(user).not_to be_valid
   end
 
   it 'must have a unique email address' do
@@ -30,6 +30,6 @@ RSpec.describe User, type: :model do
     expect(user).to be_valid
 
     user2 = build(:user, email: 'bar@example.com')
-    expect(user2).to_not be_valid
+    expect(user2).not_to be_valid
   end
 end

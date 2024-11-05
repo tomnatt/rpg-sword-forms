@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 # rubocop:disable Metrics/BlockLength
-RSpec.describe 'SwordForms', type: :request do
-  before :each do
-    @user = create(:user, name: 'Admin', email: 'admin@example.com')
-    sign_in @user
+RSpec.describe 'SwordForms' do
+  let(:user) { create(:user, name: 'Admin', email: 'admin@example.com') }
+
+  before do
+    sign_in user
   end
 
   describe 'GET /index' do
@@ -13,8 +14,8 @@ RSpec.describe 'SwordForms', type: :request do
       expect(response).to be_successful
     end
 
-    it 'should not require authentication' do
-      sign_out @user
+    it 'does not require authentication' do
+      sign_out user
       get sword_forms_path
       expect(response).to be_successful
     end
@@ -27,8 +28,8 @@ RSpec.describe 'SwordForms', type: :request do
       expect(response).to be_successful
     end
 
-    it 'should not require authentication' do
-      sign_out @user
+    it 'does not require authentication' do
+      sign_out user
       form = create(:sword_form)
       get sword_form_path(form)
       expect(response).to be_successful
@@ -42,9 +43,9 @@ RSpec.describe 'SwordForms', type: :request do
     end
 
     it 'must require authentication' do
-      sign_out @user
+      sign_out user
       get new_sword_form_path
-      expect(response).to_not be_successful
+      expect(response).not_to be_successful
     end
   end
 
@@ -56,10 +57,10 @@ RSpec.describe 'SwordForms', type: :request do
     end
 
     it 'must require authentication' do
-      sign_out @user
+      sign_out user
       form = create(:sword_form)
       get edit_sword_form_path(form)
-      expect(response).to_not be_successful
+      expect(response).not_to be_successful
     end
   end
 end

@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 # rubocop:disable Metrics/BlockLength
-RSpec.describe Tag, type: :model do
+RSpec.describe Tag do
   it 'must have a name' do
     tag = build(:tag, name: 'Stab')
     expect(tag).to be_valid
 
     tag = build(:tag, name: nil)
-    expect(tag).to_not be_valid
+    expect(tag).not_to be_valid
   end
 
   it 'must have a unique name' do
@@ -15,7 +15,7 @@ RSpec.describe Tag, type: :model do
     expect(tag).to be_valid
 
     tag2 = build(:tag, name: 'Stab')
-    expect(tag2).to_not be_valid
+    expect(tag2).not_to be_valid
   end
 
   it 'may have some sword form' do
@@ -25,12 +25,12 @@ RSpec.describe Tag, type: :model do
     tag.sword_forms << sf1
 
     # Pull back out the database to check saving
-    tag = Tag.find_by(name: 'Tag')
+    tag = described_class.find_by(name: 'Tag')
     expect(tag).to be_valid
     expect(tag.sword_forms.count).to eq 1
 
     tag.sword_forms << sf2
-    tag = Tag.find_by(name: 'Tag')
+    tag = described_class.find_by(name: 'Tag')
     expect(tag).to be_valid
     expect(tag.sword_forms.count).to eq 2
   end
@@ -41,7 +41,7 @@ RSpec.describe Tag, type: :model do
     tag.sword_forms << sf1
 
     # Pull back out the database to check saving
-    tag = Tag.find_by(name: 'Tag')
+    tag = described_class.find_by(name: 'Tag')
     expect(tag).to be_valid
     expect(tag.sword_forms.count).to eq 1
 
@@ -55,7 +55,7 @@ RSpec.describe Tag, type: :model do
     tag.sword_forms << sf
 
     # Get the tag and form fresh from the database
-    tag = Tag.find_by(name: 'Tag')
+    tag = described_class.find_by(name: 'Tag')
     sf = SwordForm.find_by(name: 'Form')
 
     # check associations both ways
@@ -69,13 +69,13 @@ RSpec.describe Tag, type: :model do
     sf = create(:sword_form, name: 'Survive')
     tag.sword_forms << sf
 
-    expect(Tag.count).to eq 1
+    expect(described_class.count).to eq 1
     expect(FormTag.count).to eq 1
     expect(SwordForm.count).to eq 1
 
     tag.destroy!
 
-    expect(Tag.count).to eq 0
+    expect(described_class.count).to eq 0
     expect(FormTag.count).to eq 0
     expect(SwordForm.count).to eq 1
 

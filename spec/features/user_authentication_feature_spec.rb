@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Unauthenticated accessing the user admin pages', type: :feature do
+RSpec.describe 'Unauthenticated accessing the user admin pages' do
   scenario 'list users page should require authentication' do
     visit users_path
     expect(page).to have_content 'You need to sign in'

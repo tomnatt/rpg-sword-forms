@@ -99,3 +99,4 @@ gem 'google_drive'
 
 # Required as dependencies change
 gem 'mutex_m'
+gem 'ostruct'

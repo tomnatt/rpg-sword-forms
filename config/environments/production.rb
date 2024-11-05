@@ -109,8 +109,5 @@ Rails.application.configure do
 
   # Enable generation of id-based attributes such as label for
   config.action_view.form_with_generates_ids = true
-
-  # Opt-in to new connection handling behaviour for Rails 7
-  config.active_record.legacy_connection_handling = false
 end
 # rubocop:enable Metrics/BlockLength

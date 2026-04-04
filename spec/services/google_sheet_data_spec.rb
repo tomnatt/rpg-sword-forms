@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe GoogleSheetData do
   let(:gsd) { described_class.new }
 
@@ -160,4 +159,3 @@ RSpec.describe GoogleSheetData do
     expect(tag).to be_nil
   end
 end
-# rubocop:enable Metrics/BlockLength

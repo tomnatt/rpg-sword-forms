@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe 'Accessing the sword forms pages' do
   scenario 'seeing the list of forms on the index page' do
     form1 = create(:sword_form, name: 'Form 1')
@@ -197,4 +196,3 @@ RSpec.describe 'Accessing the sword forms pages' do
     expect(sf2).to be_nil
   end
 end
-# rubocop:enable Metrics/BlockLength

@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe 'Accessing the user admin pages' do
   let(:user) { create(:user) }
 
@@ -96,4 +95,3 @@ RSpec.describe 'Accessing the user admin pages' do
     expect(u2).to be_nil
   end
 end
-# rubocop:enable Metrics/BlockLength

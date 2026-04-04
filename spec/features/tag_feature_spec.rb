@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe 'Accessing the tag pages' do
   scenario 'seeing the list of tags on the index page' do
     create(:tag, name: 'Tag 1')
@@ -161,4 +160,3 @@ RSpec.describe 'Accessing the tag pages' do
     expect(tag2).to be_nil
   end
 end
-# rubocop:enable Metrics/BlockLength

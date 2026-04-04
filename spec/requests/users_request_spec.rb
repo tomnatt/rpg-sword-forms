@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe 'Users' do
   let(:user) { create(:user, name: 'Admin', email: 'admin@example.com') }
 
@@ -64,4 +63,3 @@ RSpec.describe 'Users' do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

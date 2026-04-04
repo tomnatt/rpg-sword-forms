@@ -28,8 +28,8 @@ class SwordFormsController < ApplicationController
         format.html { redirect_to sword_form_url(@sword_form), notice: I18n.t('sword_forms.create_success') }
         format.json { render :show, status: :created, location: @sword_form }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @sword_form.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @sword_form.errors, status: :unprocessable_content }
       end
     end
   end
@@ -41,8 +41,8 @@ class SwordFormsController < ApplicationController
         format.html { redirect_to sword_form_url(@sword_form), notice: I18n.t('sword_forms.update_success') }
         format.json { render :show, status: :ok, location: @sword_form }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @sword_form.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @sword_form.errors, status: :unprocessable_content }
       end
     end
   end

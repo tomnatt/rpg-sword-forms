@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe SwordForm do
   it 'must have a name' do
     sf = build(:sword_form, name: 'Foo')
@@ -94,4 +93,3 @@ RSpec.describe SwordForm do
     expect(tag.sword_forms.count).to eq 0
   end
 end
-# rubocop:enable Metrics/BlockLength

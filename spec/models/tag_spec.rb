@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength
 RSpec.describe Tag do
   it 'must have a name' do
     tag = build(:tag, name: 'Stab')
@@ -83,4 +82,3 @@ RSpec.describe Tag do
     expect(sf.tags.count).to eq 0
   end
 end
-# rubocop:enable Metrics/BlockLength

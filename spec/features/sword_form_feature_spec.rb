@@ -13,14 +13,14 @@ RSpec.describe 'Accessing the sword forms pages' do
 
     visit sword_forms_path
 
-    expect(page).to have_content 'Sword forms'
+    expect(page).to have_text 'Sword forms'
     expect(page).to have_no_link 'New sword form', href: new_sword_form_path
     expect(page).to have_link 'Tags', href: tags_path
 
     # Check the page lists all the forms
-    expect(page).to have_content form1.name
-    expect(page).to have_content form2.name
-    expect(page).to have_content form3.name
+    expect(page).to have_text form1.name
+    expect(page).to have_text form2.name
+    expect(page).to have_text form3.name
 
     # Check the tags are being displayed
     expect(page).to have_xpath form_tag_selector(form1.name, tag1.name)
@@ -78,14 +78,14 @@ RSpec.describe 'Accessing the sword forms pages' do
 
     visit sword_forms_path
 
-    expect(page).to have_content 'Sword forms'
+    expect(page).to have_text 'Sword forms'
     expect(page).to have_link 'New sword form', href: new_sword_form_path
     expect(page).to have_link 'Tags', href: tags_path
 
     # Check the page lists all the forms
-    expect(page).to have_content 'Form 1'
-    expect(page).to have_content 'Form 2'
-    expect(page).to have_content 'Form 3'
+    expect(page).to have_text 'Form 1'
+    expect(page).to have_text 'Form 2'
+    expect(page).to have_text 'Form 3'
   end
 
   scenario 'viewing a sword form with no tags' do
@@ -93,8 +93,8 @@ RSpec.describe 'Accessing the sword forms pages' do
 
     visit sword_form_path(form)
 
-    expect(page).to have_content 'Form 1'
-    expect(page).to have_content 'Test sword form 1'
+    expect(page).to have_text 'Form 1'
+    expect(page).to have_text 'Test sword form 1'
     expect(page).to have_no_xpath '//h1/ul'
   end
 
@@ -105,8 +105,8 @@ RSpec.describe 'Accessing the sword forms pages' do
 
     visit sword_form_path(form)
 
-    expect(page).to have_content 'Form 1'
-    expect(page).to have_content 'Test sword form 1'
+    expect(page).to have_text 'Form 1'
+    expect(page).to have_text 'Test sword form 1'
 
     expect(page).to have_no_xpath '//h1/ul'
     expect(page).to have_link('Tag 1', href: tag_path(tag), count: 2)
@@ -139,7 +139,7 @@ RSpec.describe 'Accessing the sword forms pages' do
     click_link_or_button 'Save my form'
 
     # Page should contain success message
-    expect(page).to have_content(I18n.t('sword_forms.update_success'))
+    expect(page).to have_text(I18n.t('sword_forms.update_success'))
 
     # Should be saved, so pull from database and check
     sf = SwordForm.find_by(name: form_name)
@@ -172,7 +172,7 @@ RSpec.describe 'Accessing the sword forms pages' do
     click_link_or_button 'Save my form'
 
     # Page should contain success message
-    expect(page).to have_content(I18n.t('sword_forms.create_success'))
+    expect(page).to have_text(I18n.t('sword_forms.create_success'))
 
     # Should be saved, so pull from database and check
     sf = SwordForm.find_by(name: form_name)

@@ -13,7 +13,7 @@ RSpec.describe 'Accessing the user admin pages' do
     create(:user, name: 'User 3', email: 'user3@example.com')
 
     visit users_path
-    expect(page).to have_content('User 1')
+    expect(page).to have_text('User 1')
     expect(page).to have_css('tr.user', count: 4)
   end
 
@@ -21,8 +21,8 @@ RSpec.describe 'Accessing the user admin pages' do
     user = create(:user, name: 'User 1', email: 'user1@example.com')
 
     visit user_path(user)
-    expect(page).to have_content(user.name)
-    expect(page).to have_content(user.email)
+    expect(page).to have_text(user.name)
+    expect(page).to have_text(user.email)
   end
 
   scenario 'adding a user' do
@@ -44,7 +44,7 @@ RSpec.describe 'Accessing the user admin pages' do
     click_link_or_button 'Arise, person'
 
     # Page should contain success message
-    expect(page).to have_content(I18n.t('users.create_success'))
+    expect(page).to have_text(I18n.t('users.create_success'))
 
     # Should be saved, so pull from database and check
     user = User.find_by(name: user_name)
@@ -71,7 +71,7 @@ RSpec.describe 'Accessing the user admin pages' do
     click_link_or_button 'Arise, person'
 
     # Page should contain success message
-    expect(page).to have_content(I18n.t('users.update_success'))
+    expect(page).to have_text(I18n.t('users.update_success'))
 
     # Should be saved, so pull from database and check
     user = User.find_by(name: user_name)

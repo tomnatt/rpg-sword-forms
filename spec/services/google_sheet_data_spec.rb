@@ -75,7 +75,7 @@ RSpec.describe GoogleSheetData do
     tag_string = 'Defensive'
     gsd.create_or_fetch_tags(tag_string)
     expect(gsd.cached_tags.count).to eq 1
-    expect(gsd.cached_tags[0].name).to match(/Defensive/)
+    expect(gsd.cached_tags[0].name).to include('Defensive')
     expect(Tag.count).to eq 1
 
     # Double entry should return single-item array of Tag objects saved in database

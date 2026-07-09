@@ -8,14 +8,14 @@ RSpec.describe 'Accessing the tag pages' do
 
     visit tags_path
 
-    expect(page).to have_content 'Tags'
+    expect(page).to have_text 'Tags'
     expect(page).to have_no_link 'New tag', href: new_tag_path
     expect(page).to have_link 'Sword forms', href: sword_forms_path
 
     # Check the page lists all the tags
-    expect(page).to have_content 'Tag 1'
-    expect(page).to have_content 'Tag 2'
-    expect(page).to have_content 'Tag 3'
+    expect(page).to have_text 'Tag 1'
+    expect(page).to have_text 'Tag 2'
+    expect(page).to have_text 'Tag 3'
   end
 
   scenario 'seeing the link to create a new tag when authenicated on the index page' do
@@ -28,14 +28,14 @@ RSpec.describe 'Accessing the tag pages' do
 
     visit tags_path
 
-    expect(page).to have_content 'Tags'
+    expect(page).to have_text 'Tags'
     expect(page).to have_link 'New tag', href: new_tag_path
     expect(page).to have_link 'Sword forms', href: sword_forms_path
 
     # Check the page lists all the tags
-    expect(page).to have_content 'Tag 1'
-    expect(page).to have_content 'Tag 2'
-    expect(page).to have_content 'Tag 3'
+    expect(page).to have_text 'Tag 1'
+    expect(page).to have_text 'Tag 2'
+    expect(page).to have_text 'Tag 3'
   end
 
   scenario 'viewing a tag without forms' do
@@ -43,7 +43,7 @@ RSpec.describe 'Accessing the tag pages' do
 
     visit tag_path(tag)
 
-    expect(page).to have_content 'Stabbing'
+    expect(page).to have_text 'Stabbing'
     expect(page).to have_no_xpath('//h1/ul')
   end
 
@@ -58,17 +58,17 @@ RSpec.describe 'Accessing the tag pages' do
 
     visit tag_path(tag)
 
-    expect(page).to have_content 'Stabbing'
+    expect(page).to have_text 'Stabbing'
     expect(page).to have_link 'Form 1', href: sword_form_path(form1)
-    expect(page).to have_content form1.description
+    expect(page).to have_text form1.description
     expect(page).to have_xpath form_tag_selector(form1.name, tag.name)
 
     expect(page).to have_link 'Form 2', href: sword_form_path(form2)
-    expect(page).to have_content form2.description
+    expect(page).to have_text form2.description
     expect(page).to have_xpath form_tag_selector(form2.name, tag.name)
 
     expect(page).to have_link 'Form 3', href: sword_form_path(form3)
-    expect(page).to have_content form3.description
+    expect(page).to have_text form3.description
     expect(page).to have_xpath form_tag_selector(form3.name, tag.name)
   end
 
@@ -114,7 +114,7 @@ RSpec.describe 'Accessing the tag pages' do
     click_link_or_button 'Save my tag'
 
     # Page should contain success message
-    expect(page).to have_content(I18n.t('tags.update_success'))
+    expect(page).to have_text(I18n.t('tags.update_success'))
 
     # Should be saved, so pull from database and check
     tag = Tag.find_by(name: tag_name)
@@ -138,7 +138,7 @@ RSpec.describe 'Accessing the tag pages' do
     click_link_or_button 'Save my tag'
 
     # Page should contain success message
-    expect(page).to have_content(I18n.t('tags.create_success'))
+    expect(page).to have_text(I18n.t('tags.create_success'))
 
     # Should be saved, so pull from database and check
     tag = Tag.find_by(name: tag_name)

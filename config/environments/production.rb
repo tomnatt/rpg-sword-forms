@@ -1,6 +1,6 @@
 require 'active_support/core_ext/integer/time'
 
-# rubocop:disable Metrics/BlockLength
+# rubocop:disable-next Metrics/BlockLength
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -110,4 +110,3 @@ Rails.application.configure do
   # Enable generation of id-based attributes such as label for
   config.action_view.form_with_generates_ids = true
 end
-# rubocop:enable Metrics/BlockLength

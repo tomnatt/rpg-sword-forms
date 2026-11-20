@@ -141,6 +141,7 @@ GEM
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
     faraday-retry (1.0.4)
+    ffi (1.17.4)
     ffi (1.17.4-x86_64-linux-gnu)
     globalid (1.4.0)
       activesupport (>= 6.1)
@@ -193,6 +194,7 @@ GEM
     jwt (2.10.3)
       base64
     language_server-protocol (3.17.0.6)
+    libv8-node (24.12.0.1)
     libv8-node (24.12.0.1-x86_64-linux)
     lint_roller (1.1.0)
     logger (1.7.0)
@@ -209,6 +211,7 @@ GEM
     matrix (0.4.3)
     memoist (0.16.2)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.9)
     mini_racer (0.21.4)
       libv8-node (~> 24.12.0.1)
     minitest (6.0.6)
@@ -228,6 +231,9 @@ GEM
     net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.5)
+    nokogiri (1.19.4)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
     nokogiri (1.19.4-x86_64-linux-gnu)
       racc (~> 1.4)
     orm_adapter (0.5.0)
@@ -237,6 +243,7 @@ GEM
     parser (3.3.11.1)
       ast (~> 2.4.1)
       racc
+    pg (1.6.3)
     pg (1.6.3-x86_64-linux)
     popper_js (2.11.8)
     pp (0.6.4)
@@ -467,7 +474,7 @@ DEPENDENCIES
   webdrivers
 
 RUBY VERSION
-   ruby 3.4.4p34
+  ruby 3.4.13
 
 BUNDLED WITH
-   2.7.1
+  4.1.0

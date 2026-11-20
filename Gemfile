@@ -16,6 +16,9 @@ gem 'pg'
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma'
 
+# v3 has a breaking change
+gem 'json', '~> 2'
+
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem 'importmap-rails'
 

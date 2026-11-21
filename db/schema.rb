@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_13_135601) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_21_204853) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
 
   create_table "form_tags", force: :cascade do |t|
     t.bigint "sword_form_id", null: false

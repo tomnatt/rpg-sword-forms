@@ -61,11 +61,11 @@ class SwordFormsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_sword_form
-    @sword_form = SwordForm.find(params[:id])
+    @sword_form = SwordForm.find(params.expect(:id))
   end
 
   # Only allow a list of trusted parameters through.
   def sword_form_params
-    params.require(:sword_form).permit(:name, :description, tag_ids: [])
+    params.expect(sword_form: [:name, :description, { tag_ids: [] }])
   end
 end
